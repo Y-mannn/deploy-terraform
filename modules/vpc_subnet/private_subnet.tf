@@ -1,11 +1,11 @@
 resource "aws_subnet" "private_subnet" {
-  count = length(var.private_subnet_cidr)
+  count = length(var.private_subnet_cidrs)
 
   vpc_id = aws_vpc.vpc.id
-  cidr_block = element(var.private_subnet_cidr, count.index)
+  cidr_block = element(var.private_subnet_cidrs, count.index)
 
-  depends_on = [ aws_vpc.vpc ]
-
+  availability_zone = var.availability_zones[count.index]
+  
   tags = {
     Name = "private subnet"
   }
@@ -21,7 +21,7 @@ resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.eip
   subnet_id     = aws_subnet.public_subnet.*.id
 
-  depends_on = [aws_eip.aws_eip.eip, aws_subnet.public_subnet]
+  depends_on = [aws_eip.aws_eip.eip ]
 
   tags = {
     Name = "nat"
