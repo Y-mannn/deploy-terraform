@@ -75,7 +75,9 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color -var-file="**/env/stg.tfvars"
+      run: |
+        ls -al
+        #terraform plan -no-color -var-file="$(realpath ./env/stg.tfvars)"
 
     # - name: Terraform apply
     #   id: apply
