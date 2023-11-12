@@ -19,6 +19,9 @@ jobs:
   TF_Code_Scan:
     name: Code Scan
     environment: woo
+    defaults:
+      run:
+        working-directory: ./woo
     runs-on: ubuntu-latest
 
     steps:
@@ -43,7 +46,7 @@ jobs:
   # 코드 배포
   TF_Code_Plan_and_Apply:
     needs: TF_Code_Scan
-    name: Code Scan
+    name: Code Plan and Apply
     permissions:
       contents: read 
       pull-requests: write
@@ -72,7 +75,7 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color
+      run: terraform plan -no-color -var-file="./env/dev.tfvars"
 
     # - name: Terraform apply
     #   id: apply

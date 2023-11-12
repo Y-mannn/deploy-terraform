@@ -5,7 +5,7 @@
 resource "aws_subnet" "private" {
   count                   = local.create_private_subnets ? local.length_private_subnets : 0
 
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.vpc[0].id
   cidr_block              = element(concat(var.private_subnets, [""]), count.index) 
   availability_zone       = element(concat(var.availability_zones, [""]), count.index % 2)
 
@@ -18,7 +18,7 @@ resource "aws_subnet" "private" {
 resource "aws_route_table" "private" {
   count                   = local.create_private_subnets ? local.nat_gateway_count : 0
 
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.vpc[0].id
 
   tags = merge(
     { "Name" = "${var.env}-${var.name}-private-subnet-rt" }

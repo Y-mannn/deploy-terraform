@@ -1,7 +1,17 @@
-provider "aws" {
-  region = var.region
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
 }
 
+provider "aws" {
+  region = var.region
+  access_key = "AKIAZPRNVNCDKATBTM7S"
+  secret_key = "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"
+}
 
 ################################################################################
 # Network Module
