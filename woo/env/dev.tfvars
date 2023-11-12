@@ -1,16 +1,16 @@
-region          = "ap-northeast-2"
+region             = "ap-northeast-2"
 
-env                 = "dev"
+env                = "dev"
 
-name                = "devops"
+name               = "devops"
 
-vpc_cidr            = "10.0.0.0/16"
+vpc_cidr           = "10.0.0.0/16"
 
-public_subnets = [
+public_subnets     = [
     "10.0.1.0/24",
 ]
 
-private_subnets = [
+private_subnets    = [
     "10.0.2.0/24",
     "10.0.3.0/24",
     "10.0.4.0/24",
