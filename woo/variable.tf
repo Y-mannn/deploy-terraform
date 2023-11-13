@@ -27,18 +27,18 @@ variable "vpc_cidr" {
 
 variable "public_subnets" {
   description = "A list of public subnets inside the VPC"
-  type        = list(string)
-  default     = []
+  type        = map(list(string))
+  default     = {}
 }
 
 variable "private_subnets" {
   description = "A list of private subnets inside the VPC"
-  type        = list(string)
-  default     = []
+  type        = map(list(string))
+  default     = {}
 }
 
 variable "availability_zones" {
   description = "A list of availability zones names or ids in the region"
-  type        = list(string)
-  default     = []
+  type        = map(string)
+  default     = {}
 }

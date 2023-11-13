@@ -6,16 +6,16 @@ name               = "devops"
 
 vpc_cidr           = "10.0.0.0/16"
 
-public_subnets     = [
-    "10.0.1.0/24",
-]
+public_subnets     = {
+    "pub"  = ["10.0.1.0/24",, "ap-northeast-2a"]
+}
 
-private_subnets    = [
-    "10.0.2.0/24",
-    "10.0.3.0/24",
-    "10.0.4.0/24",
-]
+private_subnets    = {
+    "web"  = ["10.0.2.0/24", "ap-northeast-2a"]
+    "was"  = ["10.0.3.0/24", "ap-northeast-2a"]
+    "db"   = ["10.0.4.0/24", "ap-northeast-2a"]
+}
 
 availability_zones = [
-    "ap-northeast-2a",
+    "az"   ="ap-northeast-2a",
 ]

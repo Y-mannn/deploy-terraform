@@ -30,8 +30,8 @@ variable "vpc_cidr" {
 
 variable "availability_zones" {
   description = "A list of availability zones names or ids in the region"
-  type        = list(string)
-  default     = []
+  type        = map(string)
+  default     = {}
 }
 
 variable "enable_dns_hostnames" {
@@ -52,8 +52,8 @@ variable "enable_dns_support" {
 
 variable "public_subnets" {
   description = "A list of public subnets inside the VPC"
-  type        = list(string)
-  default     = []
+  type        = map(list(string))
+  default     = {}
 }
 
 variable "map_public_ip_on_launch" {
@@ -68,8 +68,8 @@ variable "map_public_ip_on_launch" {
 
 variable "private_subnets" {
   description = "A list of private subnets inside the VPC"
-  type        = list(string)
-  default     = []
+  type        = map(list(string))
+  default     = {}
 }
 
 ################################################################################

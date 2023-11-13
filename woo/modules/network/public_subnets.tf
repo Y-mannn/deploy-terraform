@@ -3,15 +3,15 @@
 ################################################################################
 
 resource "aws_subnet" "public" {
-  count                   = local.create_public_subnets ? local.length_public_subnets : 0
+  for_each                = local.create_public_subnets ? var.public_subnets : {}
 
   vpc_id                  = aws_vpc.vpc[0].id
-  cidr_block              = element(concat(var.public_subnets, [""]), count.index)
-  availability_zone       = element(concat(var.availability_zones, [""]), count.index)
+  cidr_block              = each.value[0]
+  availability_zone       = each.value[1]
   map_public_ip_on_launch = var.map_public_ip_on_launch
 
   tags = merge(
-    { "Name" = "${var.env}-${var.name}-public-subnet" }
+    { "Name" = "${var.env}-${var.name}-${each.key}-sb" }
   )
 }
 
@@ -26,9 +26,10 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  count                   = local.create_public_subnets ? local.length_public_subnets : 0
+  for_each                = local.create_public_subnets ? var.public_subnets : {}
 
-  subnet_id               = element(aws_subnet.public[*].id, count.index)
+
+  subnet_id               = aws_subnet.public[each.key].id
   route_table_id          = aws_route_table.public[0].id
 }
 
